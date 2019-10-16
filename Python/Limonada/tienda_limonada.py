@@ -1,12 +1,4 @@
 # coding=utf-8
-"""
-Donar d’alta treballadors (almanco 1).
-Fer comanda d'ingredients en cas de baix stock.
-Produir 1L de llimonada.
-Vendre n gots de llimonada (n>=1).
-Veure el guany del lloc de llimonada.
-
-"""
 from bd import BD
 
 class Tienda:
@@ -30,15 +22,17 @@ class Tienda:
 
 
     def producir_limonada(self):
-        pass
+        """ 500 ml de zumo de limón, 500 ml de agua fría, 100 g de azúcar """
+        self.datos.producir_productos_1L()
 
     def vender_limonada(self):
-        pass
+        self.datos.vender_limonada()
+        self.datos.update_ganancias_mas_1('Tienda 1')
 
     def menu(self):
         print("\n--------Menu--------")
         print("1) Dar de alta nuevo trabajador")
-        print("2) Pedido de ingredientes")
+        print("2) Pedido de ingredientes en 'gramos'/'ml'")
         print("3) Producir 1L de limonada")
         print("4) Vender limonada")
         print("5) Ver las ganancias de la limonada")
@@ -58,6 +52,7 @@ class Tienda:
         elif opcion == 5:
             self.datos.select_ganancias()
         elif opcion == 6:
+            self.datos.close_mysql()
             exit(0)
         else:
             print("La opcion introducida es incorrecta")
