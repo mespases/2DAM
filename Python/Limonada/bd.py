@@ -1,3 +1,4 @@
+# coding=utf-8
 import sqlite3
 
 class BD:
@@ -66,6 +67,12 @@ class BD:
 
         if cant_limon >= 500 and cant_azucar >= 100 and cant_agua >= 500:
             return True
+        if cant_limon < 500:
+            print("Falta comprar limon, cantidad: " + str(cant_limon))
+        if cant_azucar < 100:
+            print("Falta comprar azucar, cantidad: " + str(cant_azucar))
+        if cant_agua < 500:
+            print("Falta comprar agua, cantidad: " + str(cant_agua))
         else:
             return False
 
@@ -76,6 +83,7 @@ class BD:
             self.mysql.execute(consulta)
             self.mysql.commit()
             print("Se ha vendido 1 vaso de limonada")
+            self.alarma_limonada()
         else:
             print("No hay mas limonada para vender")
 
@@ -91,6 +99,17 @@ class BD:
             return True
         else:
             return False
+
+    def alarma_limonada(self):
+        consulta = "SELECT cantidad_ml_g FROM Productos WHERE nombre = 'Limonada';"
+
+        limonada = self.mysql.execute(consulta)
+
+        for l in limonada:
+            cant_limonada = l[0]
+
+        if cant_limonada < 750:
+            print("¡¡¡ Alerta, te queda poca limonada !!!")
 
     def select_productos(self):
         consulta = "SELECT * FROM Productos;"
