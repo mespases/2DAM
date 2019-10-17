@@ -13,12 +13,10 @@ class Tienda:
         edad = int(input("Introduce la edad del trabajador: "))
         self.datos.insert_personal(nombre=nombre, edad=edad)
 
-
     def pedido_ingredientes(self):
         producto = raw_input("\nIntroduce el nombre del producto a insertar: ").title()
         cantidad = int(input("Introduce la cantidad que quieres pedir: "))
         self.datos.update_productos(cantidad=cantidad, nombre_producto=producto)
-
 
     def producir_limonada(self):
         """ 500 ml de zumo de limón, 500 ml de agua fría, 100 g de azúcar """
