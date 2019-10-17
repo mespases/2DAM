@@ -6,17 +6,16 @@ class Tienda:
     datos = BD()
 
     def __init__(self):
-        while True:
-            self.menu()
+        self.menu()
 
     def alta_trabajador(self):
-        nombre = raw_input("\nIntroduce el nombre del trabajador: ")
+        nombre = raw_input("\nIntroduce el nombre del trabajador: ").title()
         edad = int(input("Introduce la edad del trabajador: "))
         self.datos.insert_personal(nombre=nombre, edad=edad)
 
 
     def pedido_ingredientes(self):
-        producto = raw_input("\nIntroduce el nombre del producto a insertar: ")
+        producto = raw_input("\nIntroduce el nombre del producto a insertar: ").title()
         cantidad = int(input("Introduce la cantidad que quieres pedir: "))
         self.datos.update_productos(cantidad=cantidad, nombre_producto=producto)
 
@@ -30,15 +29,17 @@ class Tienda:
         self.datos.update_ganancias_mas_1('Tienda 1')
 
     def menu(self):
-        print("\n--------Menu--------")
-        print("1) Dar de alta nuevo trabajador")
-        print("2) Pedido de ingredientes en 'gramos'/'ml'")
-        print("3) Producir 1L de limonada")
-        print("4) Vender limonada")
-        print("5) Ver las ganancias de la limonada")
-        print("6) Salir")
-        opcion = input("Introduce una opcion: ")
-        self.sub_menu(opcion)
+        opcion = 0
+        while opcion != 6:
+            print("\n--------Menu--------")
+            print("1) Dar de alta nuevo trabajador")
+            print("2) Pedido de ingredientes en 'gramos'/'ml'")
+            print("3) Producir 1L de limonada")
+            print("4) Vender limonada")
+            print("5) Ver las ganancias de la limonada")
+            print("6) Salir")
+            opcion = int(input("Introduce una opcion: "))
+            self.sub_menu(opcion)
 
     def sub_menu(self, opcion):
         if opcion == 1:
