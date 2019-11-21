@@ -4,10 +4,23 @@ import random
 class EA:
 
     bd = BD()
-    campeonato = 2
+    # campeonato = 10
 
     def __init__(self):
-        pass
+        self.menu()
+
+    def menu(self):
+        opcion = 0
+        while opcion != 3:
+            opcion = int(input("Introduce una opcion: "))
+
+            if opcion == 1:
+                self.generarPartidos()
+            elif opcion == 2:
+                self.jugarPartidos()
+            elif opcion == 3:
+                self.bd.close_sql()
+
 
     def generarPartidos(self):
         """ Genera partidos aleatorios entre los equipos de la bd """
@@ -30,11 +43,17 @@ class EA:
         for i in range(4):
             lista_ganadores.append(random.randrange(2))
 
-        self.bd.ganadoresPartidos(lista_ganadores, "Final", self.campeonato)
+        for i in range(3):
+            if i == 0:
+                self.bd.ganadoresPartidos(lista_ganadores, "Cuartos", self.campeonato)
+            elif i == 1:
+                self.bd.ganadoresPartidos(lista_ganadores, "Semifinal", self.campeonato)
+            elif i == 2:
+                self.bd.ganadoresPartidos(lista_ganadores, "Final", self.campeonato)
+            else:
+                print "Error"
 
 
 
 a = EA()
-# a.generarPartidos()
-a.jugarPartidos()
 a.bd.close_sql()
