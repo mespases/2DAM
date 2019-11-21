@@ -29,7 +29,7 @@ class EA:
         self.campeonato = int(input("Introduce el id del campeonato: "))
 
         while len(numeros) < 8:
-            n = random.randrange(cant_equipos[0])
+            n = random.randrange(cant_equipos)
             if n not in numeros:
                 numeros.append(n)
 
@@ -50,10 +50,6 @@ class EA:
                 self.bd.ganadoresPartidos(lista_ganadores, "Semifinal", self.campeonato)
             elif i == 2:
                 self.bd.ganadoresPartidos(lista_ganadores, "Final", self.campeonato)
-            else:
-                print "Error"
-
 
 
 a = EA()
-a.bd.close_sql()
