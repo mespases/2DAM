@@ -8,6 +8,7 @@ class BD:
     cursor = sql.cursor()
 
     def insertJugadores(self):
+        """ Inserta nuevos jugadores en la bd """
         try:
             nombre = "z"
             nick = "z"
@@ -21,6 +22,7 @@ class BD:
             print("Fallo al intentar meter un jugador")
 
     def insertEquipos(self):
+        """ Inserta nuevos equipos en la bd """
         try:
             nombre = "Master"
             camp_cagado = 5
@@ -32,6 +34,7 @@ class BD:
             print("Fallo al intentar meter un equipo")
 
     def insertCampeonatos(self):
+        """ Inserta nuevos campeonatos en la bd """
         try:
             nombre = "gg"
             consulta = "INSERT INTO 'Campeonato'('Nombre') VALUES ('{}');".format(nombre)
@@ -50,7 +53,7 @@ class BD:
         for i in result:
             contador += 1
 
-        return contador, result
+        return contador
 
     def resultadoGenerarPartidos(self, numeros, campeonato):
         """ Guarda en la bd el resultado aleatorio generado """
@@ -59,9 +62,13 @@ class BD:
         consulta = "SELECT * FROM Equipos"
         result = self.sql.execute(consulta)
 
+        # Anade a los equipos en la array
         for i in result:
             lista_equipos.append(i[0])
 
+        # Anade a lista de resultados: ej: numeros = [7,3,1,6,5,4,2,8]
+        # i = 0, numeros[i] -> posicion i 0 = 7 / siguiente iteracion.  i = 1, numeros[i] -> posicion i 1 = 3
+        # Resultado -> lista_equipos[numeros[i]] == lista_equipos[7] / siguiente iteracion. lista_equipos[numeros[i]] == lista_equipos[3]
         for i in range(8):
             lista_resultados.append(lista_equipos[numeros[i]])
 
@@ -78,15 +85,17 @@ class BD:
         self.sql.commit()
 
     def ganadoresPartidos(self, lista_ganadores, ronda, campeonato):
+        """ Introduce el la bd el ganador del partido """
         consulta = "SELECT * FROM Partidos WHERE Ronda = '{}' AND Ganador IS NULL;".format(ronda)
         result = self.sql.execute(consulta)
-        lista = []
+        lista_partidos = []
 
         for i in result:
-            lista.append(i)
+            lista_partidos.append(i)
 
+        # Introduce el ganador del partido en la bd
         contador = 0
-        for i in lista:
+        for i in lista_partidos:
             if lista_ganadores[contador] == 0:
                 self.sql.execute("UPDATE Partidos SET Ganador = '{}' WHERE Equipo1 = '{}';".format(i[1], i[1]))
             else:
@@ -97,25 +106,26 @@ class BD:
         self.clasificar(ronda, campeonato)
 
     def clasificar(self, ronda, campeonato):
-        """ Clasifica a los ganadores en una ronda mas arriba """
+        """ Clasifica a los ganadores en una ronda mas arriba, ej: Ganador de Cuartos pasa a Semifinal """
         consulta = "SELECT * FROM Partidos WHERE Ronda = '{}' AND Campeonato = {};".format(ronda, campeonato)
         result = self.sql.execute(consulta)
-        lista = []
+        lista_partidos = []
 
         for i in result:
-            lista.append(i)
+            lista_partidos.append(i)
 
         if ronda == "Cuartos":
-            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Semifinal');".format(campeonato, lista[0][3], lista[1][3]))
-            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Semifinal');".format(campeonato, lista[2][3], lista[3][3]))
+            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Semifinal');".format(campeonato, lista_partidos[0][3], lista_partidos[1][3]))
+            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Semifinal');".format(campeonato, lista_partidos[2][3], lista_partidos[3][3]))
         elif ronda == "Semifinal":
-            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Final');".format(campeonato, lista[0][3], lista[1][3]))
+            self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Final');".format(campeonato, lista_partidos[0][3], lista_partidos[1][3]))
         elif ronda == "Final":
             self.sumarPremioEquipoGanador(campeonato)
 
         self.sql.commit()
 
     def sumarPremioEquipoGanador(self, campeonato):
+        """ Suma al ganador del campeonato 1 campeonato ganado """
         consulta = "SELECT Ganador FROM Partidos WHERE Ronda = 'Final' AND Campeonato = {};".format(campeonato)
         result = self.sql.execute(consulta)
 
@@ -129,6 +139,7 @@ class BD:
 
 
     def close_sql(self):
+        """ Cierra sqlite """
         self.sql.close()
 
 
