@@ -111,16 +111,20 @@ class BD:
         elif ronda == "Semifinal":
             self.sql.execute("INSERT INTO Partidos(Campeonato, Equipo1, Equipo2, Ronda) VALUES ('{}', '{}', '{}', 'Final');".format(campeonato, lista[0][3], lista[1][3]))
         elif ronda == "Final":
-            self.sumarPremioEquipoGanador()
+            self.sumarPremioEquipoGanador(campeonato)
 
         self.sql.commit()
 
-    def sumarPremioEquipoGanador(self):
-        consulta = "SELECT * FROM Partidos WHERE Ronda = 'Final';"
-        result = [self.sql.execute(consulta)]
+    def sumarPremioEquipoGanador(self, campeonato):
+        consulta = "SELECT Ganador FROM Partidos WHERE Ronda = 'Final' AND Campeonato = {};".format(campeonato)
+        result = self.sql.execute(consulta)
 
-        print("¡¡¡ El equipo {} es el ganador del campeonato !!!".format(result[0][3]))
-        self.sql.execute("UPDATE Equipos SET Campeonatos_Ganados = Campeonatos_Ganados + 1 WHERE Nombre = '{}'';".format(result[3]))
+        ganador = []
+        for i in result:
+            ganador.append(i)
+
+        print("¡¡¡ El equipo {} es el ganador del campeonato !!!".format(ganador[0][0]))
+        self.sql.execute("UPDATE Equipos SET Campeonatos_Ganados = Campeonatos_Ganados + 1 WHERE Nombre = '{}';".format(ganador[0][0]))
         self.sql.commit()
 
 
