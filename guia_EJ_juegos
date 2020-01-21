@@ -9,3 +9,43 @@ Tener una lista de ofertas y poder mostrarlas
 
 Clientes potenciales:
   - Son los clientes que tengas mas de 3 intereses guardados
+
+
+Pseudo codigo:
+  def Añadir cliente
+    añadir datos del cliente
+    preguntar si acepta la ley
+    pedir que intereses tiene 
+    
+  def Imprimir ofertas a clientes que han aceptado la ley
+  
+  def Añadir nuevos intereses 
+  
+  def Cambiar de cliente normal a potencial
+    comprobar si ha aceptado la ley
+      comprueba que tenga mas de 3 intereses
+        cambia cliente potencial a True
+        
+  def menu
+    while opcion != salir
+      comprueba para cambiar a cliente potencial
+    
+      opcion 1 -> añadir clientes
+      
+      opcion 2 -> añadir nuevos intereses
+      
+      opcion 3 -> imprimir ofertas por pantalla
+
+BD:
+  Cliente: 
+    - Nombre -> varchar
+    - dni -> char
+    - fecha de nacimiento -> char
+    - direccion -> varchar
+    - localidad -> varchar
+    - municipio -> varchar
+    - codigo postal -> char
+    - correo -> varchar
+    - Intereses -> Array
+    - Acepta_ley -> Boolean
+    - Cliente_potencial -> Boolean
