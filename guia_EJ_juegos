@@ -1,0 +1,11 @@
+Cliente:
+  - Nombre, dni, fecha de nacimiento, direccion, localidad, municipio, codigo postal, correo
+  - Tiene que aceptar la ley de proteccion de datos
+  - Guardar intereses del cliente, ej, juegos, pelis...
+
+Si el cliente ha aceotado la ley, enviar promociones
+
+Tener una lista de ofertas y poder mostrarlas 
+
+Clientes potenciales:
+  - Son los clientes que tengas mas de 3 intereses guardados
