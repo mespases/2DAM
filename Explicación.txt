@@ -1,9 +1,0 @@
-Para hacer este ejercicio me he basado bastante en los ejercicios que ya teníamos hechos o que pusiste tu en tu github.
-
-Lo primero es que he hecho 2 clases, una para el baño y la otra para la Persona, esta es una extensión de Thread.
-
-Clase Baño: En esta clase he hecho 3 cosas, lo primero es declarar una variable de tipo booleana para saber si el baño esta ocupado o no, luego he hecho 2 métodos uno para esperar usando wait() para que los hilos no continúen hasta que yo les diga, el último método es salir del baño usando un notify() para avisar al siguiente hilo y que este ya no haga el wait().
-
-Clase Persona: En esta clase también he hecho 3 cosas, lo primero es un constructor de la clase, para asignarle un baño y nombre a cada objeto y así poderlo identificar, luego un método llamado esperar_turno(), que lo que hace es un sleep simulando la espera de una cola real, por último hago un run() que es lo que se va a ejecutar cuando inicie los hilos, en este método hago lo siguiente, entra el primer hilo en el baño, con el while hago que mientras el baño este ocupado, que el siguiente hilo espere a su turno, el primer hilo ocupa el baño con la booleana, espera a acabar de hacer sus necesidades con el esperar_turno(), paso a false la booleana para que le siguiente hilo salga del while y también hago el notify para que el siguiente hilo deje de esperar su turno.
-
-Main: Hago una instancia de Baño y 3 de Persona, a cada persona le asigno un nombre y el mismo baño a todos, luego hago 3 instancias de Thread para cada una de las personas y empieza la simulación con el start() “para que haga el run() de la clase Persona”.
