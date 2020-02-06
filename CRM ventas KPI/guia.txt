@@ -1,0 +1,37 @@
+Python:
+	- CRM
+		- Menu:	
+			- Vender
+			- Crear factura
+			- Precio por producto
+			- Ver media de articulos por venta
+				- cada dia
+				- cada mes
+				- cada trimestre
+				- cada año
+			- Media de los ingresos de la tienda
+				- cada dia
+				- cada mes
+				- cada trimestre
+				- cada año
+			- Top 5 productos mas vendidos
+			- Top 5 productos menos vendidos
+		
+	- Conexion_BD
+	
+	- Banco
+		- metodo realizar pago -> return True
+
+BD SQLite:
+	Productos:
+		- Nombre varchar(25)
+		- Precio int
+		- Cantidad_vendida_diaria
+		- Cantidad_vendida_mes
+		- Cantidad_vendida_trimestral
+		- Cantidad_vendida_anual
+		
+	Factura:
+		- Nombre_cliente varchar(25)
+		- Numero_de_articulos_vendidos int
+		- Precio_total int 
