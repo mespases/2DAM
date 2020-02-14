@@ -37,14 +37,14 @@ class CRM:
     def __printOpcionesSecundarias(self, mediasDe):
         """ Imprime las opciones secundarias disponibles en el
             submenu """
-        if mediasDe == "articulos":
-            print("\n===========Medias de articulo===========")
+        if mediasDe == "mas":
+            print("\n===========Medias de articulo mas vendido===========")
             print("1) Media dia")
             print("2) Media mes")
             print("3) Media trimestre")
             print("4) Media anyo")
-        elif mediasDe == "tienda":
-            print("\n===========Medias de tienda===========")
+        elif mediasDe == "menos":
+            print("\n===========Medias de articulo menos vendido===========")
             print("1) Media dia")
             print("2) Media mes")
             print("3) Media trimestre")
@@ -62,13 +62,15 @@ class CRM:
         elif opcion == 3:
             self.bd.getMediaNumArticulos()
         elif opcion == 4:
-            pass
+            self.bd.getTotalIngresos()
         elif opcion == 5:
-            self.__printOpcionesSecundarias("articulos")
+            self.__printOpcionesSecundarias("mas")
             opcionSecundaria = int(input("\nIntroduce una opcion: "))
+            self.__elegirOpcionesMenuSecundarias("mas", opcionSecundaria)
         elif opcion == 6:
-            self.__printOpcionesSecundarias("tienda")
+            self.__printOpcionesSecundarias("menos")
             opcionSecundaria = int(input("\nIntroduce una opcion: "))
+            self.__elegirOpcionesMenuSecundarias("menos", opcionSecundaria)
         elif opcion == 7:
             self.dia += 1
             self.bd.resetearCantVendida("diaria")
@@ -93,25 +95,25 @@ class CRM:
     def __elegirOpcionesMenuSecundarias(self, mediasDe, opcionesSecundarias):
         """ Selecciona la opcion elegida del submenu y posteriormente
             hara el metodo correspondiente para cada opcion elegida """
-        if mediasDe == "articulos":
+        if mediasDe == "mas":
             if opcionesSecundarias == 1:
-                pass
+                self.bd.getProductosMasVendidos("diaria")
             elif opcionesSecundarias == 2:
-                pass
+                self.bd.getProductosMasVendidos("mensual")
             elif opcionesSecundarias == 3:
-                pass
+                self.bd.getProductosMasVendidos("trimestral")
             elif opcionesSecundarias == 4:
-                pass
+                self.bd.getProductosMasVendidos("anual")
 
-        elif mediasDe == "tienda":
+        elif mediasDe == "menos":
             if opcionesSecundarias == 1:
-                pass
+                self.bd.getProductosMenosVendidos("diaria")
             elif opcionesSecundarias == 2:
-                pass
+                self.bd.getProductosMenosVendidos("mensual")
             elif opcionesSecundarias == 3:
-                pass
+                self.bd.getProductosMenosVendidos("trimestral")
             elif opcionesSecundarias == 4:
-                pass
+                self.bd.getProductosMenosVendidos("anual")
 
     def __vender(self):
         """ Vende el producto seleccionado y pide al cliente si
@@ -119,14 +121,12 @@ class CRM:
         self.bd.selectProductos()
         producto = raw_input("\nQue producto vas a comprar: ")
         if producto.title() in self.bd.productos:
-            cantidad = int(raw_input("Introduce la cantidad deseada: "))
+            cantidad = int(input("Introduce la cantidad deseada: "))
             nombre = raw_input("\nNombre del cliente: ")
 
             factura = raw_input("Quiere factura, S/N: ")
             if factura.upper() == "S":
                 self.__crearFactura(cantidad, nombre, producto.title())
-            else:
-                self.bd.crearFacturaBD(producto, cantidad, nombre)
 
             self.bd.sumarCantidades(producto.title(), cantidad)
             self.banco.realizarPago()
