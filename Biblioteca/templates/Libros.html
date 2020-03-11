@@ -1,0 +1,54 @@
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<title>Libros</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link href="../static/css/mycss.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="table-title">
+<h3>Libros</h3>
+</div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Datos</th>
+<th class="text-left"> Info. Libros</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+{% for i in range(num) %}
+    <tr>
+        <td class="text-left">Nombre</td>
+        <td class="text-left">{{ nombre[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Autor</td>
+        <td class="text-left">{{ autor[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Genero</td>
+        <td class="text-left">{{ genero[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Editorial</td>
+        <td class="text-left">{{ editorial[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Año</td>
+        <td class="text-left">{{ ano[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Copias</td>
+        <td class="text-left">{{ num_copias[i] }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+  </body>
+</html>

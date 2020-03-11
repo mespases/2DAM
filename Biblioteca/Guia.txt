@@ -1,0 +1,50 @@
+Biblioteca:
+	- Libros, al menos tiene que haber 1
+	- Lector, puede tener un maximo de 3 libros
+	- Cada libro prestado tiene una fecha de entrega de 30 dias posteriores a la "compra"
+	por cada dia que se pase, son 2 dias sin poder coger un libro
+
+Funcionalidad:
+
+	- Dar de alta nuevos libros
+	- Dar de alta copia de libros y revisar las copias
+	ok - Ver libros disponibles y la cantidad de las copias
+	- Lector pide un libro, comprueba -> no multas, no mas de 3 libros y si libros disponibles
+	- Devolver libro, comprobar si se tiene que multar y luego aumentar canitdad de las copias
+	ok - Consultar los socios que esten multados
+
+BD: 
+
+	- Libro
+		- id int auto increment pk
+		- Nombre varchar(25)
+		- Autor varchar(25)
+		- Genero varchar(25)
+		- Editorial varchar(25)
+		- Año date
+		- Numero de copias int
+		
+	- Lector
+		- id int auto increment pk
+		- Nombre varchar(25)
+		- Telefono char(9)
+		- Direccion varchar(25)
+		- Num_libros_prestados int
+		- Dias_multa int
+		
+	- Prestamo
+		- id_libro int fk (id) libro
+		- id_cliente int fk (id) lecotr
+		- Fecha_inicio date
+		- Fecha_fin date
+		
+	- Multas
+		- id_cliente int fk (id) lector
+		- num_multas int
+		
+Clases Python:
+	
+	- Libro
+	- Lector
+	- Prestamo
+	- Multas

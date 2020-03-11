@@ -1,0 +1,46 @@
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<title>Prestamos</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link href="../static/css/mycss.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="table-title">
+<h3>Prestamos</h3>
+</div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Datos</th>
+<th class="text-left"> Info. Prestamos</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+{% for i in range(num) %}
+    <tr>
+        <td class="text-left">Lector</td>
+        <td class="text-left">{{ lector[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Libro</td>
+        <td class="text-left">{{ libro[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Fecha Inicio</td>
+        <td class="text-left">{{ fecha_inicio[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Fecha Fin</td>
+        <td class="text-left">{{ fecha_fin[i] }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+  </body>
+</html>

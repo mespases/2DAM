@@ -1,0 +1,50 @@
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<title>Lectores</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link href="../static/css/mycss.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="table-title">
+<h3>Lectores</h3>
+</div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Datos</th>
+<th class="text-left"> Info. Lectores</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+{% for i in range(num) %}
+    <tr>
+        <td class="text-left">Nombre</td>
+        <td class="text-left">{{ nombre[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Telefono</td>
+        <td class="text-left">{{ telefono[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Direccion</td>
+        <td class="text-left">{{ direccion[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Libros adquiridos</td>
+        <td class="text-left">{{ num_libros[i] }}</td>
+    </tr>
+    <tr>
+        <td class="text-left">Dias de multa</td>
+        <td class="text-left">{{ dias_multa[i] }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+  </body>
+</html>
