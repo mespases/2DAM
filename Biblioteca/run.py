@@ -1,9 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request
 from lector import Lector
 from multas import Multa
 from prestamo import Prestamo
 from libro import Libro
-import sqlite3
 
 # Clases a usar
 app = Flask(__name__)
@@ -14,7 +13,7 @@ libro = Libro()
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return redirect("/libros", code=302)
 
 @app.route('/lectores')
 def mostrarLector():
@@ -39,6 +38,38 @@ def mostrarPrestamo():
 def mostrarMultas():
     multas.extractInfo()
     return render_template("Multas.html", lector=multas.nombre_lector, num_multas=multas.num_multas, num=multas.num)
+
+@app.route('/add_libro')
+def addLibro():
+    return render_template('addLibro.html')
+
+@app.route('/inf_add_libro', methods=['POST'])
+def inf_add_libro():
+    json = request.form.to_dict()
+    libro.addLibro(json.get('Nombre'), json.get('Autor'), json.get('Genero'), json.get('Editorial'), json.get('Ano'))
+    return redirect("/libros", code=302)
+
+@app.route('/add_copia_libro')
+def addCopiaLibro():
+    libro.extractInfo()
+    return render_template("copia_libro.html", nombre=libro.nombre, num=libro.num)
+
+@app.route('/inf_add_copia_libro', methods=['POST'])
+def inf_add_copia_libro():
+    json = request.form.to_dict()
+    libro.addCopiaLibro(json.get("Nombre"), json.get("Cantidad"))
+    return redirect("/libros", code=302)
+
+@app.route('/pedir_libro')
+def pedirLibro():
+    libro.extractInfo()
+    return render_template("pedir_libro.html", nombre=libro.nombre, num=libro.num, id=libro.id_libro)
+
+@app.route('/inf_pedir_libro', methods=['POST'])
+def inf_pedir_libro():
+    json = request.form.to_dict()
+    prestamo.addPrestamo(json.get("id_libro"), json.get("id_lector"))
+    return redirect("/libros", code=302)
 
 if __name__ == "__main__":
     app.debug = True

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir libro</title>
+    <link href="../static/css/form.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3><a href="/libros">Libros</a> <a href="/lectores">Lectores</a> <a href="/prestamos">Prestamos</a> <a
+            href="/multas">Multas</a> <a href="/add_copia_libro">Añadir copia de un libro</a> </h3>
+
+
+    <form class="form" method="post" action="/inf_add_libro" enctype='application/json'>
+        <h2 class="hedit">Libro</h2>
+        <p type="Nombre:" value="Nombre"><input placeholder="Introduce el nombre del libro" name="Nombre"></input></p>
+        <p type="Autor:" value="Autor"><input placeholder="Introduce el autor del libro" name="Autor"></input></p>
+        <p type="Genero:" value="Genero"><input placeholder="Introduce el genero del libro" name="Genero"></input></p>
+        <p type="Editorial:" value="Editorial"><input placeholder="Introduce la editorial del libro"
+                name="Editorial"></input></p>
+        <p type="Año:" value="Ano"><input placeholder="Introduce el año del libro" name="Ano"></input></p>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Peticion libro</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link href="../static/css/mycss.css" rel="stylesheet">
+    <link href="../static/css/form.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3><a href="/libros">Libros</a> <a href="/lectores">Lectores</a> <a href="/prestamos">Prestamos</a> <a
+            href="/multas">Multas</a> <a href="/add_libro">Añadir libro</a> </h3>
+
+    <div class="table-title">
+        <h3>Libros disponibles</h3>
+    </div>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Datos</th>
+                <th class="text-left"> Info. Libros</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            {% for i in range(num) %}
+            <tr>
+                <td class="text-left">ID</td>
+                <td class="text-left">{{ id[i] }}</td>
+            </tr>
+            <tr>
+                <td class="text-left">Nombre</td>
+                <td class="text-left">{{ nombre[i] }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form class="form" method="post" action="/inf_add_copia_libro" enctype='application/json'>
+        <h2 class="hedit">Libro a llevar</h2>
+        <p type="ID persona:" value="id_lector"><input placeholder="Introduce tu id" name="id_lector"></input></p>
+        <p type="ID libro:" value="id_libro"><input placeholder="Introduce el id del libro" name="id_libro"></input></p>
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+
+</html>

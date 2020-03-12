@@ -40,3 +40,13 @@ class Libro:
 
         print("Se ha insertado un nuevo libro")
         sql.close()
+
+    def addCopiaLibro(self, nombre, cantidad):
+        if nombre in self.nombre:
+            sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
+            query = "UPDATE Libro SET Num_copias = Num_copias+{} WHERE Nombre = '{}';".format(cantidad, nombre)
+            sql.execute(query)
+            sql.commit()
+
+            print("Se han insertado copias del libro")
+            sql.close()

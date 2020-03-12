@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 
 class Prestamo:
 
@@ -31,8 +32,12 @@ class Prestamo:
         self.num = len(self.id_libro)
         sql.close()
 
-    def addPrestamo(self, id_libro, id_lector, fecha_inicio, fecha_fin):
+    def addPrestamo(self, id_libro, id_lector):
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
+
+        fecha_inicio = ""
+        fecha_fin = ""
+
         query = "INSERT INTO Prestamo (id_libro, id_lector, Fecha_inicio, Fecha_fin) " \
                 "VALUES ( {}, {}, '{}', '{}');".format(id_libro, id_lector, fecha_inicio, fecha_fin)
         sql.execute(query)

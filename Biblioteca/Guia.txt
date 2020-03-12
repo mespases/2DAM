@@ -6,10 +6,11 @@ Biblioteca:
 
 Funcionalidad:
 
-	- Dar de alta nuevos libros
-	- Dar de alta copia de libros y revisar las copias
+	ok - Dar de alta nuevos libros
+	ok - Dar de alta copia de libros y revisar las copias
 	ok - Ver libros disponibles y la cantidad de las copias
-	- Lector pide un libro, comprueba -> no multas, no mas de 3 libros y si libros disponibles
+	- Añadir nuevos lectores
+	- Lector pide un libro, comprueba -> no multas, no mas de 3 libros y si libros disponibles '''''En prestamo falta añadir las dos fechas'''''''
 	- Devolver libro, comprobar si se tiene que multar y luego aumentar canitdad de las copias
 	ok - Consultar los socios que esten multados
 
