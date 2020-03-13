@@ -12,6 +12,7 @@ class Prestamo:
     nombre_libro = []
 
     def extractInfo(self):
+        """ Extrae toda la informacion de la BD y la anade en arrays """
         # Se usa del para no tener datos duplicados
         del self.id_libro[:], self.id_cliente[:], self.fecha_inicio[:], self.fecha_final[:], self.nombre_lector[:], self.nombre_libro[:]
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
@@ -33,6 +34,7 @@ class Prestamo:
         sql.close()
 
     def addPrestamo(self, id_libro, id_lector):
+        """ Anade un prestamo pasandole los parametros especificados """
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
 
         fecha_inicio = ""

@@ -11,6 +11,7 @@ class Lector:
     dias_multa = []
 
     def extractInfo(self):
+        """ Extrae toda la informacion de la BD y la anade en arrays """
         # Se usa del para no tener datos duplicados
         del self.id_lector[:], self.nombre[:], self.telefono[:], self.direccion[:], self.num_libros_prestados[:], self.dias_multa[:]
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
@@ -30,11 +31,12 @@ class Lector:
         sql.close()
 
     def addLector(self, nombre, telefono, direccion):
+        """ Anade un lector pasandole todos los parametros especificados """
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
         query = "INSERT INTO Lector (Nombre, Telefono, Direccion, Num_libros_prestados, Dias_multa) " \
                 "VALUES ('{}', '{}', '{}', 0, 0);".format(nombre, telefono, direccion)
-        self.sql.execute(query)
-        self.sql.commit()
+        sql.execute(query)
+        sql.commit()
 
         print("Se ha insertado un nuevo cliente")
         sql.close()

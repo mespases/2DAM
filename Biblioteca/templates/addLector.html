@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir lector</title>
+    <link href="../static/css/form.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3><a href="/libros">Libros</a> <a href="/lectores">Lectores</a> <a href="/prestamos">Prestamos</a> <a
+            href="/multas">Multas</a> <a href="/add_copia_libro">Añadir copia de un libro</a> </h3>
+
+
+    <form class="form" method="post" action="/info_add_lector" enctype='application/json'>
+        <h2 class="hedit">Lector</h2>
+        <p type="Nombre:" value="Nombre"><input placeholder="Introduce el nombre del lector" name="Nombre"></input></p>
+        <p type="Telefono:" value="Telefono"><input placeholder="Introduce el telefono del lector" name="Telefono"></input></p>
+        <p type="Direccion:" value="Direccion"><input placeholder="Introduce la direccion del lector" name="Direccion"></input></p>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>

@@ -12,6 +12,7 @@ class Libro:
     num_copias = []
 
     def extractInfo(self):
+        """ Extrae toda la informacion de la BD y la anade en arrays """
         # Se usa del para no tener datos duplicados
         del self.id_libro[:], self.nombre[:], self.autor[:], self.genero[:], self.editorial[:], self.ano[:], self.num_copias[:]
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
@@ -32,6 +33,7 @@ class Libro:
         sql.close()
 
     def addLibro(self, nombre, autor, genero, editorial, ano):
+        """ Anade un libro a la BD pasandole los parametros especificados """
         sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
         query = "INSERT INTO Libro(Nombre, Autor, Genero, Editorial, Ano, Num_copias) " \
                 "VALUES ('{}', '{}', '{}', '{}', '{}', 1);".format(nombre, autor, genero, editorial, ano)
@@ -42,6 +44,7 @@ class Libro:
         sql.close()
 
     def addCopiaLibro(self, nombre, cantidad):
+        """ Anade una copia de libro pasandole los parametros especificados"""
         if nombre in self.nombre:
             sql = sqlite3.connect("Biblioteca_bd.db", timeout=10)
             query = "UPDATE Libro SET Num_copias = Num_copias+{} WHERE Nombre = '{}';".format(cantidad, nombre)
